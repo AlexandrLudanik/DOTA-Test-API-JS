@@ -1,0 +1,18 @@
+{
+  "name": "dota_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --config ./test/config/mocha.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.1",
+    "mochawesome": "^4.1.0"
+  }
+}
