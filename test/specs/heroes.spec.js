@@ -2,26 +2,30 @@ const {expect} = require('chai');
 const testData = require('../testData/heroes');
 const axios = require('axios');
 
-describe('Get hero data', function () {
+describe('DOTA', async () => {
 
-    it('should check data in list of heroes', async function () {
+    const passStatusCode = 200;
+    let response;
 
-        const expectedHeroName = testData[0].localized_name;
-        const expectedAttackType = testData[34].attack_type;
-        const passStatusCode = 200;
-
+    before(async () => {
         const requestParameters = {
             method: 'GET',
             url: 'https://api.opendota.com/api/heroes',
             json: true
         };
 
-        const response = await axios(requestParameters);
-
-        expect(response.status).to.be.equal(passStatusCode);
-        expect(response.data[1].roles).to.be.an('array');
-        expect(...response.data[0].roles).to.be.equal(...testData[0].roles);
-        expect(response.data[0].localized_name).to.be.equal(expectedHeroName);
-        expect(response.data[34].attack_type).to.be.equal(expectedAttackType);
+        response = await axios(requestParameters);
     });
+
+    testData.forEach((arr, index) => {
+        it(`should check data for heroes`, () => {
+            expect(response.status).to.be.equal(passStatusCode);
+            expect(response.data[index].name).to.be.equal(arr.name);
+            expect(response.data[index].roles).to.be.an('array');
+            expect(...response.data[index].roles).to.be.equal(...testData[index].roles);
+            expect(response.data[index].attack_type).to.be.equal(arr.attack_type);
+            expect(response.data[index].localized_name).to.be.equal(arr.localized_name);
+            expect(response.data[index].primary_attr).to.be.equal(arr.primary_attr);
+        });
+    })
 });
