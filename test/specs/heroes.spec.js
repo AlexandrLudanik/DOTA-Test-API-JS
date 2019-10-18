@@ -26,6 +26,7 @@ describe('DOTA', async () => {
             expect(response.data[index].attack_type).to.be.equal(arr.attack_type);
             expect(response.data[index].localized_name).to.be.equal(arr.localized_name);
             expect(response.data[index].primary_attr).to.be.equal(arr.primary_attr);
+            expect(response.data[index].legs).to.be.equal(arr.legs);
         });
     })
 });
